@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Janus - fake rest api server")
+	fmt.Printf("Janus - fake rest api server (%s) \n", VERSION)
 	c := getConfig()
 
 	server.StartServer(c)
