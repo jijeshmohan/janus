@@ -24,7 +24,7 @@ Make sure that the golang is installed in your system
 
 To run janus, go to any directory and create a json file called ```config.json``` . This defines the REST endpoints which server need to expose. ( config.json file described in the next section.). Run the application in the same directory by typing `janus` in the terminal
  
-##### Basic Structure of a config.json file
+### Basic Structure of a config.json file
 
 The basic structure of config file shown below. A config file has follwing attributes
 * port
