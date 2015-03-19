@@ -52,7 +52,7 @@ e.g config.json
        	    "content_type": "application/json",
        	    "status": 200,
        	    "file": "./files/some.json"
-       	    "headers":{
+       	    "headers": {
             	"key": "value",
                 "key1": "value1"
             }
@@ -78,9 +78,9 @@ e.g:
 ```js
 {
 	"name": "user"
-	"headers": [  // headers field is optional
+	"headers": {  // headers field is optional
 		"key": "value"
-	]
+	}
 }
 ```
 
@@ -111,7 +111,7 @@ A single url representasion showed below
    "content_type": "application/json", // optional. default to application/json; charset=utf-8
    "status": 200, // optional , default to 200
    "file": "./files/some.json" // optional, if not specified , the response will be empty string. if specified it should be a valid file.
-   "headers":{  //Optional
+   "headers": {  //Optional
     "key": "value",
     "key1": "value1"
    }
