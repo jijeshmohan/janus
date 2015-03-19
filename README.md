@@ -88,8 +88,8 @@ e.g:
 
 e.g for user resource , it wil look follwoing files to send the data
 
-| Verb | Url | FILE | 
-|--------|--------|---|
+| Verb | Url | FILE | Description |
+|--------|--------|---|---|
 | GET       | /user       |  ./user/index.json  | if the file not available app will send a 404|
 | POST       | /user       |  ./user/post.json  | if file is present it will send 201 with the content of the file otherwise 404|
 |GET| /user/:item |./user/[any file name which is matching :item].json | if the file present, it will send the file with 200, otherwise 404. you can add item1.json, item2.json etc if you want to fake different get request
