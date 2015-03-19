@@ -12,9 +12,11 @@ Janus is a fake rest api server which can be used for various purpose including 
 
 ### Install
 
-###### Get Binary Distribution
+##### Get Binary Distribution
 
-###### Build from source
+You can download the binary distribution from [here](https://github.com/jijeshmohan/janus/releases/tag/1.0.0)
+
+##### Build from source
 
 Make sure that the golang is installed in your system
 
@@ -51,7 +53,7 @@ e.g config.json
        	    "method": "GET",
        	    "content_type": "application/json",
        	    "status": 200,
-       	    "file": "./files/some.json"
+       	    "file": "./files/some.json",
        	    "headers": {
             	"key": "value",
                 "key1": "value1"
@@ -69,7 +71,7 @@ You can define two types of REST endpoints in the configuration file.
 * Resources
 * Urls
 
-###### Resources 
+##### Resources 
 
 This represent basic REST resource which will exposes all [standard methods](http://restful-api-design.readthedocs.org/en/latest/methods.html#standard-methods). Janus will look for a folder with the name of the resource in the same directory as routes.json for sending the data correspoding to the methods.
 
@@ -97,7 +99,7 @@ e.g for user resource , it wil look follwoing files to send the data
 
 You can specify any header informations which need to send along with the methods. This is optional field
 
-###### Urls
+##### Urls
 Urls section is for specifying individual urls which can't qualify for a standard REST resource methods.
 
 This section gives more freedom in terms for defining HTTP Methods and content type and files. 
