@@ -1,0 +1,34 @@
+{
+  "port": 8000,
+  "resources": [
+    {
+        "name": "user",
+        "headers": {
+          "X-Auth-Token": "sample_token" 
+        }
+    }
+  ],
+  "urls": [
+    {
+    	"url":"/admin/{user}/disable",
+    	"status": 200,
+    	"method": "POST",
+    	"file":"other/disable.json",
+      "headers": {
+          "New-Header": "header value",
+          "Admin": "true" 
+      }
+    },
+    {
+      "url":"/admin/{user}/enable",
+    	"status": 500,
+    	"method": "POST"
+    },
+    {
+      "url":"/admin/disabled",
+      "status": 200,
+      "method": "GET",
+      "file":"other/disable.json"
+    }
+  ]
+}
