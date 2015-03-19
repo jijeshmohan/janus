@@ -37,30 +37,28 @@ e.g config.json
 
 ```json
 {
-    "port": 8080, 
-	"resources":[
-		{
-        	"name": "user",
-       	 "headers": {
-				"key": "value",
-			}
-        }
-
-    ],
-    "urls":[
-    	{
-        	"url": "direct/url/for/something",
-       	    "method": "GET",
-       	    "content_type": "application/json",
-       	    "status": 200,
-       	    "file": "./files/some.json",
-       	    "headers": {
-            	"key": "value",
-                "key1": "value1"
-            }
-        }
-    ]
-
+  "port": 8080,
+  "resources": [
+    {
+      "name": "user",
+      "headers": {
+        "key": "value"
+      }
+    }
+  ],
+  "urls": [
+    {
+      "url": "direct/url/for/something",
+      "method": "GET",
+      "content_type": "application/json",
+      "status": 200,
+      "file": "./files/some.json",
+      "headers": {
+        "key": "value",
+        "key1": "value1"
+      }
+    }
+  ]
 }
 ```
 
