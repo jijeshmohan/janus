@@ -9,13 +9,13 @@ import (
 	"strings"
 )
 
-// url type represent a url resource in rest api
+// URL type represent a url resource in rest api
 // Url is mandatory.
 // ContentType defaults to application/json if not provided.
 // Status code default to 200
 // Method defaults to GET if not provided.
 type URL struct {
-	Url         string            `json:"url"`
+	URL         string            `json:"url"`
 	Method      string            `json:"method,omitempty"`
 	ContentType string            `json:"content_type,omitempty"`
 	File        string            `json:"file,omitempty"`
@@ -39,13 +39,13 @@ func (u *URL) sanitize(root string) error {
 		u.StatusCode = 200
 	}
 
-	if !strings.HasPrefix(u.Url, "/") {
-		u.Url = "/" + u.Url
+	if !strings.HasPrefix(u.URL, "/") {
+		u.URL = "/" + u.URL
 	}
 
 	if u.File != "" {
 		if _, err := os.Stat(filepath.Join(root, u.File)); err != nil {
-			return fmt.Errorf("Invalid file '%s' in URL '%s'", u.File, u.Url)
+			return fmt.Errorf("Invalid file '%s' in URL '%s'", u.File, u.URL)
 		}
 	}
 
@@ -58,7 +58,7 @@ func (u *URL) GetEndPoint(rootPath string) (*Endpoint, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &Endpoint{URL: u.Url, Method: u.Method, Handler: u.getHandle(rootPath)}, nil
+	return &Endpoint{URL: u.URL, Method: u.Method, Handler: u.getHandle(rootPath)}, nil
 }
 
 // getHandle generate a static handle for the URL.

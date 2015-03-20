@@ -17,7 +17,7 @@ type router struct {
 }
 
 // NewRouter create a new router from the configuration provided.
-func NewRouter(c *config.Config) *router {
+func newRouter(c *config.Config) *router {
 	return &router{c: c, h: mux.NewRouter()}
 }
 
@@ -32,7 +32,7 @@ func (r *router) generateRoutes() (*mux.Router, []error) {
 		return nil, r.errs
 	}
 
-	endpoints := make([]*rest.Endpoint, 0)
+	endpoints := make([]*rest.Endpoint, 0, len(r.c.URLs)+(len(r.c.Resources)*7))
 
 	// validate and generate urls URLS
 	for _, url := range r.c.URLs {

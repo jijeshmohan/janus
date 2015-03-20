@@ -7,10 +7,10 @@ import (
 	"github.com/jijeshmohan/janus/config"
 )
 
-// Start the server with the configuration provided.
+// StartServer starts the server with the configuration provided.
 func StartServer(c *config.Config) {
 
-	router := NewRouter(c)
+	router := newRouter(c)
 
 	routes, errs := router.generateRoutes()
 	if len(errs) != 0 {

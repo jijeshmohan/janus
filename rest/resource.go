@@ -1,4 +1,4 @@
-// rest package represent different types of rest types and
+// Package rest represent different types of rest types and
 // its manipulations.
 package rest
 
@@ -12,13 +12,13 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// resource respresent a single resource in rest api.
+// Resource respresent a single resource in rest api.
 type Resource struct {
 	Name    string            `json:"name"`
 	Headers map[string]string `json:"headers,omitempty"`
 }
 
-//  GetEndPoints returns all the endpoints for this resource
+// GetEndPoints returns all the endpoints for this resource
 // if the specified folder is not present it will send an error
 func (r *Resource) GetEndPoints(rootPath string) ([]*Endpoint, error) {
 	resourcePath := filepath.Join(rootPath, r.Name)
