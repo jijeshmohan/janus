@@ -19,6 +19,8 @@ _cgo_export.*
 
 _testmain.go
 
+config.json
+
 *.exe
 *.test
 *.prof
