@@ -127,6 +127,7 @@ Note: Url also support dynamic url like ```/admin/{user}/enable``` which can mat
 ### TODO
 
 * Different authentication supports.
+* Websocket support.
 * Admin UI for configuration and adding url at runtime.
 * Logging
 
