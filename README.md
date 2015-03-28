@@ -14,7 +14,7 @@ Janus is a fake rest api server which can be used for various purpose including 
 
 ##### Get Binary Distribution
 
-You can download the binary distribution from [here](https://github.com/jijeshmohan/janus/releases/tag/1.0.0)
+You can download the latest binary distribution from [here](https://github.com/jijeshmohan/janus/releases/tag/1.0.0)
 
 ##### Build from source
 
@@ -34,14 +34,21 @@ Note : A sample config and associated files are there in example directory.
 
 The basic structure of config file shown below. A config file has follwing attributes
 * port
+* auth 
 * resources 
 * urls
+
+Detailed description of each attributes are below.
 
 e.g config.json
 
 ```json
 {
   "port": 8080,
+  "auth": {
+    "username": "user1",
+    "password": "secret"
+  },
   "resources": [
     {
       "name": "user",
@@ -66,14 +73,32 @@ e.g config.json
 }
 ```
 
+##### Port
+
 **port** in configuration file defines in which port the server needs to run.This is an optional field and if not provided the default port is 8000.
 
-You can define two types of REST endpoints in the configuration file.  
+##### Auth
 
-* Resources
-* Urls
+**auth** in configuration provides basic auth support in janus. This is an optional field. If provided this will verify the username and password for all requests. 
+
+You need to specify username and password like below
+
+```js
+"auth": {
+  "username": "user1",
+  "password": "password"
+}
+```
+
+##### REST enspoints 
+
+You can define two types of REST endpoints in the configuration file
+
+* resources
+* urls
 
 ##### Resources 
+
 
 This represent basic REST resource which will exposes all [standard methods](http://restful-api-design.readthedocs.org/en/latest/methods.html#standard-methods). Janus will look for a folder with the name of the resource in the same directory as routes.json for sending the data correspoding to the methods.
 
@@ -126,10 +151,14 @@ Note: Url also support dynamic url like ```/admin/{user}/enable``` which can mat
 
 ### TODO
 
-* Different authentication supports.
+* Dely Responses. ( For simulating slow connections)
 * Websocket support.
 * Admin UI for configuration and adding url at runtime.
 * Logging
+
+### Changelog
+
+Please check the changelog [here](https://github.com/jijeshmohan/janus/blob/master/CHANGELOG)
 
 ### License
 

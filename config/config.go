@@ -11,9 +11,15 @@ import (
 // Config type represent configuration json.
 type Config struct {
 	Port      int             `json:"port,omitempty"`
+	Auth      *auth           `json:"auth,omitempty"`
 	Path      string          `json:"-"`
 	Resources []rest.Resource `json:"resources,omitempty"`
 	URLs      []rest.URL      `json:"urls,omitempty"`
+}
+
+type auth struct {
+	Name     string `json:"username"`
+	Password string `json:"password"`
 }
 
 // ParseFile parse input file and generate Config type.

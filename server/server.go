@@ -7,6 +7,20 @@ import (
 	"github.com/jijeshmohan/janus/config"
 )
 
+type app struct {
+	h http.Handler
+}
+
+type handler func(http.Handler) http.Handler
+
+func (a *app) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	a.h.ServeHTTP(w, r)
+}
+
+func (a *app) middleware(h handler) {
+	a.h = h(a.h)
+}
+
 // StartServer starts the server with the configuration provided.
 func StartServer(c *config.Config) {
 
@@ -28,7 +42,16 @@ func StartServer(c *config.Config) {
 
 	fmt.Println("Starting server at ", addr)
 
-	if err := http.ListenAndServe(addr, corsHandler(routes)); err != nil {
+	server := &app{h: routes}
+	server.middleware(corsHandler)
+
+	if c.Auth != nil {
+		server.middleware(basicAuth(c.Auth.Name, c.Auth.Password))
+	}
+
+	server.middleware(recoverHandler)
+
+	if err := http.ListenAndServe(addr, server); err != nil {
 		fmt.Println(err)
 	}
 }

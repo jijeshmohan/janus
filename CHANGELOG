@@ -1,3 +1,10 @@
+1.1.0 / March 19 - 2015
+=======================
+* Basic Auth Support
+* Recovery Middleware
+* Refctoring
+
+
 1.0.0 / March 19 - 2015
 =======================
 * Initial release
@@ -5,4 +12,4 @@
 
 Copyright (C) Jijesh Mohan
 
-See LICENSE for the license
+See LICENSE file for the license

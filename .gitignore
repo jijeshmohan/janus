@@ -29,3 +29,5 @@ config.json
 janus
 janus.exe
 janus-*
+build/*
+build.sh
