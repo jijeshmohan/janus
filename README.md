@@ -14,7 +14,7 @@ Janus is a fake rest api server which can be used for various purpose including 
 
 ##### Get Binary Distribution
 
-You can download the latest binary distribution from [here](https://github.com/jijeshmohan/janus/releases/tag/1.0.0)
+You can download the latest binary distribution from [here](https://github.com/jijeshmohan/janus/releases/tag/1.1.0)
 
 ##### Build from source
 
