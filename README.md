@@ -7,6 +7,7 @@ Janus is a fake rest api server which can be used for various purpose including 
 * Easy to configure and use.
 * Supports all http methods and REST resources.
 * Supports CORS.
+* Basic Auth Support
 * Available in all platforms.
 
 
