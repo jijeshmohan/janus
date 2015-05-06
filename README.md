@@ -19,7 +19,7 @@ You can download the latest binary distribution from [here](https://github.com/j
 
 ##### Build from source
 
-Make sure that the golang is installed in your system
+[Go](https://golang.org/dl/) should be installed (version **1.4+** is required) in the system. Make sure you have Go properly installed, including setting up your [GOPATH](http://golang.org/doc/code.html#GOPATH).
 
 ```go get github.com/jijeshmohan/janus```
 
