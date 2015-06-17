@@ -45,6 +45,10 @@ func StartServer(c *config.Config) {
 	server := &app{h: routes}
 	server.middleware(corsHandler)
 
+	if c.EnableLog {
+		server.middleware(logHandler)
+	}
+
 	if c.Auth != nil {
 		server.middleware(basicAuth(c.Auth.Name, c.Auth.Password))
 	}
@@ -54,4 +58,5 @@ func StartServer(c *config.Config) {
 	if err := http.ListenAndServe(addr, server); err != nil {
 		fmt.Println(err)
 	}
+
 }

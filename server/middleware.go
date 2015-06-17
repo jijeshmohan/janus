@@ -46,3 +46,10 @@ func recoverHandler(next http.Handler) http.Handler {
 
 	return http.HandlerFunc(fn)
 }
+
+func logHandler(h http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Println(r.Method,r.Proto,r.URL)
+		h.ServeHTTP(w, r)
+	})
+}

@@ -60,6 +60,6 @@ func (r *router) generateRoutes() (*mux.Router, []error) {
 	for _, en := range endpoints {
 		r.h.Handle(en.URL, en.Handler).Methods(en.Method)
 	}
-
+	
 	return r.h, r.errs
 }
