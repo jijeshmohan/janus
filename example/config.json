@@ -1,5 +1,6 @@
 {
   "port": 8000,
+  "enableLog": false,
   "resources": [
     {
         "name": "user",
