@@ -16,7 +16,7 @@ type Config struct {
 	Path      string          `json:"-"`
 	Resources []rest.Resource `json:"resources,omitempty"`
 	URLs      []rest.URL      `json:"urls,omitempty"`
-	EnableLog    bool		  `json:"enableLog,omitempty"`
+	EnableLog bool            `json:"enableLog,omitempty"`
 }
 
 type auth struct {
