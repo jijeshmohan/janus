@@ -11,6 +11,7 @@ import (
 // Config type represent configuration json.
 type Config struct {
 	Port      int             `json:"port,omitempty"`
+	Delay     int             `json:"delay,omitempty"`
 	Auth      *auth           `json:"auth,omitempty"`
 	Path      string          `json:"-"`
 	Resources []rest.Resource `json:"resources,omitempty"`

@@ -3,6 +3,7 @@ package server
 import (
 	"log"
 	"net/http"
+	"time"
 )
 
 // corsHandler middleare to handle cors.
@@ -15,6 +16,18 @@ func corsHandler(h http.Handler) http.Handler {
 			h.ServeHTTP(w, r)
 		}
 	})
+}
+
+// delayHandler middleare to handle delay in response.
+func delayHandler(delay int) handler {
+	return func(h http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			if delay > 0 {
+				time.Sleep(time.Duration(delay) * time.Millisecond)
+			}
+			h.ServeHTTP(w, r)
+		})
+	}
 }
 
 // basicAuth middleware for handling basic auth request.

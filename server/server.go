@@ -54,6 +54,7 @@ func StartServer(c *config.Config) {
 	}
 
 	server.middleware(recoverHandler)
+	server.middleware(delayHandler(c.Delay))
 
 	if err := http.ListenAndServe(addr, server); err != nil {
 		fmt.Println(err)

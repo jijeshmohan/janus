@@ -1,6 +1,7 @@
 {
   "port": 8000,
   "enableLog": false,
+  "delay": 0,
   "resources": [
     {
         "name": "user",
