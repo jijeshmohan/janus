@@ -1,8 +1,14 @@
+1.2.0 / Jun 21 - 2015
+=======================
+* Delay Responses
+* Logging Support ( Thanks maheshbr)
+
+
 1.1.0 / March 28 - 2015
 =======================
 * Basic Auth Support
 * Recovery Middleware
-* Refctoring
+* Refactoring
 
 
 1.0.0 / March 19 - 2015

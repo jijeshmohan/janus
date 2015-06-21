@@ -1,4 +1,4 @@
-##Janus 
+##Janus
 
 Janus is a fake rest api server which can be used for various purpose including frontend application development , testing etc.
 
@@ -26,7 +26,7 @@ You can download the latest binary distribution from [here](https://github.com/j
 ### How to run
 
 To run janus, go to any directory and create a json file called ```config.json``` . This defines the REST endpoints which server need to expose. ( config.json file described in the next section.). Run the application in the same directory by typing `janus` in the terminal
- 
+
 
 Note : A sample config and associated files are there in example directory.
 
@@ -35,8 +35,10 @@ Note : A sample config and associated files are there in example directory.
 
 The basic structure of config file shown below. A config file has follwing attributes
 * port
-* auth 
-* resources 
+* enableLog
+* delay
+* auth
+* resources
 * urls
 
 Detailed description of each attributes are below.
@@ -46,6 +48,8 @@ e.g config.json
 ```json
 {
   "port": 8080,
+  "enableLog": false,
+  "delay": 0,
   "auth": {
     "username": "user1",
     "password": "secret"
@@ -78,9 +82,20 @@ e.g config.json
 
 **port** in configuration file defines in which port the server needs to run.This is an optional field and if not provided the default port is 8000.
 
+
+
+##### EnableLog
+
+**enableLog** in configuration file defines whether we need to log the requests form clients. Default values is false.
+
+
+##### Delay
+
+**delay** in configuration file provides a response delay ( in milliseconds). Default value is 0 which means there is no delay. This feature helps to simulate network delay or server response time.
+
 ##### Auth
 
-**auth** in configuration provides basic auth support in janus. This is an optional field. If provided this will verify the username and password for all requests. 
+**auth** in configuration provides basic auth support in janus. This is an optional field. If provided this will verify the username and password for all requests.
 
 You need to specify username and password like below
 
@@ -91,14 +106,14 @@ You need to specify username and password like below
 }
 ```
 
-##### REST enspoints 
+##### REST enspoints
 
 You can define two types of REST endpoints in the configuration file
 
 * resources
 * urls
 
-##### Resources 
+##### Resources
 
 
 This represent basic REST resource which will exposes all [standard methods](http://restful-api-design.readthedocs.org/en/latest/methods.html#standard-methods). Janus will look for a folder with the name of the resource in the same directory as routes.json for sending the data correspoding to the methods.
@@ -130,14 +145,14 @@ You can specify any header informations which need to send along with the method
 ##### Urls
 Urls section is for specifying individual urls which can't qualify for a standard REST resource methods.
 
-This section gives more freedom in terms for defining HTTP Methods and content type and files. 
+This section gives more freedom in terms for defining HTTP Methods and content type and files.
 
 A single url representasion showed below
 
 ```js
  {
-   "url": "/admin/user/enable", //mandatory 
-   "method": "GET", // mandatory 
+   "url": "/admin/user/enable", //mandatory
+   "method": "GET", // mandatory
    "content_type": "application/json", // optional. default to application/json; charset=utf-8
    "status": 200, // optional , default to 200
    "file": "./files/some.json" // optional, if not specified , the response will be empty string. if specified it should be a valid file.
@@ -152,10 +167,10 @@ Note: Url also support dynamic url like ```/admin/{user}/enable``` which can mat
 
 ### TODO
 
-* Dely Responses. ( For simulating slow connections)
+* File upload/download support
+* Compression
 * Websocket support.
 * Admin UI for configuration and adding url at runtime.
-* Logging
 
 ### Changelog
 
