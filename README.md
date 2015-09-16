@@ -38,8 +38,10 @@ The basic structure of config file shown below. A config file has follwing attri
 * enableLog
 * delay
 * auth
+* jwt
 * resources
 * urls
+
 
 Detailed description of each attributes are below.
 
@@ -105,6 +107,24 @@ You need to specify username and password like below
   "password": "password"
 }
 ```
+
+##### JWT
+
+**jwt** in configuration provides jwt support in janus. This will issue a new jwt token when they call the url specified in jwt section below.
+
+
+```js
+"jwt": {
+  "url": "/auth/token",
+  "exp:" 12, // expiry in minutes 
+  "secret": "secret key for encryption"
+  "data": {
+    "userid": 1234,
+    "admin": false
+  }
+}
+```
+
 
 ##### REST enspoints
 

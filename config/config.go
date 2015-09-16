@@ -3,6 +3,7 @@ package config
 import (
 	"encoding/json"
 	"errors"
+	"io"
 	"os"
 
 	"github.com/jijeshmohan/janus/rest"
@@ -13,6 +14,7 @@ type Config struct {
 	Port      int             `json:"port,omitempty"`
 	Delay     int             `json:"delay,omitempty"`
 	Auth      *auth           `json:"auth,omitempty"`
+	JWT       *rest.JWTData   `json:"jwt,omitempty"`
 	Path      string          `json:"-"`
 	Resources []rest.Resource `json:"resources,omitempty"`
 	URLs      []rest.URL      `json:"urls,omitempty"`
@@ -35,11 +37,14 @@ func ParseFile(path string) (*Config, error) {
 	}
 
 	defer file.Close()
+	return parseConfig(file)
+}
 
+func parseConfig(r io.Reader) (*Config, error) {
 	config := Config{}
 
-	decoder := json.NewDecoder(file)
-	err = decoder.Decode(&config)
+	decoder := json.NewDecoder(r)
+	err := decoder.Decode(&config)
 
 	if err != nil {
 		return nil, err

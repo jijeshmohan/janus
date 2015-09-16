@@ -53,6 +53,10 @@ func StartServer(c *config.Config) {
 		server.middleware(basicAuth(c.Auth.Name, c.Auth.Password))
 	}
 
+	if c.JWT != nil {
+		server.middleware(jwtVerify(*c.JWT))
+	}
+
 	server.middleware(recoverHandler)
 	server.middleware(delayHandler(c.Delay))
 

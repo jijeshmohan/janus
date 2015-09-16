@@ -3,7 +3,11 @@ package server
 import (
 	"log"
 	"net/http"
+	"strings"
 	"time"
+
+	"github.com/dgrijalva/jwt-go"
+	"github.com/jijeshmohan/janus/rest"
 )
 
 // corsHandler middleare to handle cors.
@@ -65,4 +69,29 @@ func logHandler(h http.Handler) http.Handler {
 		log.Println(r.Method, r.Proto, r.URL)
 		h.ServeHTTP(w, r)
 	})
+}
+
+// jwtVerify middleware for handling jwt verification in request.
+func jwtVerify(j rest.JWTData) handler {
+	return func(h http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+			if req.URL.RequestURI() == j.URL {
+				h.ServeHTTP(w, req)
+				return
+			}
+			auth := req.Header.Get("Authorization")
+			if strings.HasPrefix(strings.ToLower(auth), "bearer ") {
+				auth = auth[7:]
+			}
+			token, err := jwt.Parse(auth, func(token *jwt.Token) (interface{}, error) {
+				return []byte(j.Secret), nil
+			})
+			if err == nil && token.Valid {
+				h.ServeHTTP(w, req)
+			} else {
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
+		})
+	}
 }

@@ -34,6 +34,16 @@ func (r *router) generateRoutes() (*mux.Router, []error) {
 
 	endpoints := make([]*rest.Endpoint, 0, len(r.c.URLs)+(len(r.c.Resources)*7))
 
+	if r.c.JWT != nil {
+		e, err := r.c.JWT.GetEndPoint(rootPath)
+		if err != nil {
+			r.errs = append(r.errs, err)
+			return nil, r.errs
+		}
+
+		endpoints = append(endpoints, e)
+	}
+
 	// validate and generate urls URLS
 	for _, url := range r.c.URLs {
 		u := url
@@ -60,6 +70,6 @@ func (r *router) generateRoutes() (*mux.Router, []error) {
 	for _, en := range endpoints {
 		r.h.Handle(en.URL, en.Handler).Methods(en.Method)
 	}
-	
+
 	return r.h, r.errs
 }
