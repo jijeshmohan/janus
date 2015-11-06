@@ -71,5 +71,13 @@ func (r *router) generateRoutes() (*mux.Router, []error) {
 		r.h.Handle(en.URL, en.Handler).Methods(en.Method)
 	}
 
+	// static files
+	if r.c.Static != nil {
+		e, err := r.c.Static.GetEndPoint(rootPath)
+		if err != nil {
+			r.errs = append(r.errs, err)
+		}
+		r.h.PathPrefix(r.c.Static.URL).Handler(e.Handler)
+	}
 	return r.h, r.errs
 }

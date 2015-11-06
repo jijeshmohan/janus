@@ -117,7 +117,7 @@ You need to specify username and password like below
 "jwt": {
   "url": "/auth/token",
   "exp:" 12, // expiry in minutes 
-  "secret": "secret key for encryption"
+  "secret": "secret key"
   "data": {
     "userid": 1234,
     "admin": false

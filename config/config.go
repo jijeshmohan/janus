@@ -15,6 +15,7 @@ type Config struct {
 	Delay     int             `json:"delay,omitempty"`
 	Auth      *auth           `json:"auth,omitempty"`
 	JWT       *rest.JWTData   `json:"jwt,omitempty"`
+	Static    *rest.Static    `json:"static,omitempty"`
 	Path      string          `json:"-"`
 	Resources []rest.Resource `json:"resources,omitempty"`
 	URLs      []rest.URL      `json:"urls,omitempty"`

@@ -1,6 +1,7 @@
-[
-  {
-    "name": "user1",
-    "email": "user1@example.com"
-  }
-]
+{
+    "id": 12,
+    "name": "Jijesh Mohan",
+    "email": "user1@example.com",
+    "imageUrl": "https://media.licdn.com/media/p/4/000/149/1c3/3a9eae6.jpg"
+}
+

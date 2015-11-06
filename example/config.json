@@ -1,36 +1,96 @@
 {
   "port": 8000,
   "enableLog": false,
-  "delay": 0,
+  "delay": 500,
   "resources": [
     {
-        "name": "user",
-        "headers": {
-          "X-Auth-Token": "sample_token" 
-        }
+      "name": "user",
+      "headers": {
+        "X-Auth-Token": "sample_token"
+      }
     }
   ],
+  "static": {
+    "path": "dist",
+    "url": "ui"
+  },
   "urls": [
     {
-    	"url":"/admin/{user}/disable",
-    	"status": 200,
-    	"method": "POST",
-    	"file":"other/disable.json",
+      "url": "/admin/{user}/disable",
+      "status": 200,
+      "method": "POST",
+      "file": "other/disable.json",
       "headers": {
-          "New-Header": "header value",
-          "Admin": "true" 
+        "New-Header": "header value",
+        "Admin": "true"
       }
     },
     {
-      "url":"/admin/{user}/enable",
-    	"status": 500,
-    	"method": "POST"
+      "url": "/admin/{user}/enable",
+      "status": 500,
+      "method": "POST"
     },
     {
-      "url":"/admin/disabled",
+      "url": "/admin/disabled",
       "status": 200,
       "method": "GET",
-      "file":"other/disable.json"
+      "file": "other/disable.json"
+    },
+    {
+      "url": "/auths/current-user",
+      "status": 200,
+      "content_type": "application/json",
+      "method": "GET",
+      "file": "other/users.json"
+    },
+    {
+      "url": "/users/auth/google_oauth2",
+      "status": 200,
+      "content_type": "application/json",
+      "method": "POST",
+      "file": "other/users.json"
+    },
+    {
+      "url": "/stage",
+      "status": 200,
+      "content_type": "application/json",
+      "method": "GET",
+      "file": "other/stages.json"
+    },
+    {
+      "url": "/candidates",
+      "status": 200,
+      "content_type": "application/json",
+      "method": "POST",
+      "file": "other/candidate.js"
+    },
+     {
+      "url": "/candidates",
+      "status": 200,
+      "content_type": "application/json",
+      "method": "GET",
+      "file": "other/candidates.js"
+    },
+    {
+      "url": "/candidates/2",
+      "status": 200,
+      "content_type": "application/json",
+      "method": "GET",
+      "file": "other/candidate2.js"
+    },
+    {
+      "url": "/candidates/3",
+      "status": 200,
+      "content_type": "application/json",
+      "method": "GET",
+      "file": "other/candidate3.js"
+    },
+    {
+      "url": "/candidates/{id}",
+      "status": 401,
+      "content_type": "application/json",
+      "method": "GET",
+      "file": "other/candidate.js"
     }
   ]
 }
