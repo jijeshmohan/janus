@@ -21,7 +21,7 @@ You can download the latest binary distribution from [here](https://github.com/j
 
 [Go](https://golang.org/dl/) should be installed (version **1.4+** is required) in the system. Make sure you have Go properly installed, including setting up your [GOPATH](http://golang.org/doc/code.html#GOPATH).
 
-```go get github.com/jijeshmohan/janus```
+```go get -u github.com/jijeshmohan/janus```
 
 ### How to run
 
@@ -41,7 +41,7 @@ The basic structure of config file shown below. A config file has follwing attri
 * jwt
 * resources
 * urls
-
+* static 
 
 Detailed description of each attributes are below.
 
@@ -125,6 +125,18 @@ You need to specify username and password like below
 }
 ```
 
+##### Static 
+
+**staic** in configuration allows to serve static files in janus. With this option you can make janus to serve static files for your api ( e.g. javascript frontend like angular, reactjs etc..)
+
+```js
+"static": {
+	"url": "/ui",
+	"path": "public"
+}
+```
+In above configuration, url specifies what would be the root path of your static files , like `http://localhost:8080/ui/index.html` and `path` specified the actual directory from which teh static files need to be served. This is relative to the configuration files directory. 
+
 
 ##### REST enspoints
 
@@ -187,7 +199,7 @@ Note: Url also support dynamic url like ```/admin/{user}/enable``` which can mat
 
 ### TODO
 
-* File upload/download support
+* File upload support
 * Compression
 * Websocket support.
 * Admin UI for configuration and adding url at runtime.

@@ -1,0 +1,76 @@
+{
+  "port": 8000,
+  "enableLog": false,
+  "delay": 0,
+  "jwt": {
+    "url": "/auth/token",
+    "exp": 12,
+    "secret": "WOW,MuchShibe,ToDogge",
+    "data": {
+      "userid": 1234,
+      "admin": false
+    }
+  },
+  "static": {
+    "path": "dist",
+    "url": "/"
+  }
+  "resources": [
+    {
+      "name": "user",
+      "headers": {
+        "X-Auth-Token": "sample_token"
+      }
+    }
+  ],
+  "urls": [
+    {
+      "url": "/admin/{user}/disable",
+      "status": 200,
+      "method": "POST",
+      "file": "other/disable.json",
+      "headers": {
+        "New-Header": "header value",
+        "Admin": "true"
+      }
+    },
+    {
+      "url": "/admin/{user}/enable",
+      "status": 500,
+      "method": "POST"
+    },
+    {
+      "url": "/admin/disabled",
+      "status": 200,
+      "method": "GET",
+      "file": "other/disable.json"
+    },
+    {
+      "url": "/auths/current-user",
+      "status": 200,
+      "content_type": "application/json",
+      "method": "GET",
+      "file": "other/users.json"
+    },
+    {
+      "url": "/users/auth/google_oauth2",
+      "status": 200,
+      "content_type": "application/json",
+      "method": "POST",
+      "file": "other/users.json"
+    },
+    {
+      "url": "/stage",
+      "status": 200,
+      "content_type": "application/json",
+      "method": "GET",
+      "file": "other/stages.json"
+    },
+    {
+      "url": "/candidates",
+      "status": 200,
+      "content_type": "application/json",
+      "method": "POST"
+    }
+  ]
+}
