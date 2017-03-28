@@ -49,6 +49,7 @@ func (r *Resource) getHandle(filePath string, status int) http.Handler {
 			return
 		}
 		defer data.Close()
+
 		w.Header().Set("Content-type", "application/json; charset=utf-8")
 		for key, value := range r.Headers {
 			if key == "Content-type" {
@@ -56,6 +57,7 @@ func (r *Resource) getHandle(filePath string, status int) http.Handler {
 			}
 			w.Header().Set(key, value)
 		}
+
 		w.WriteHeader(status)
 		io.Copy(w, data)
 	})
@@ -74,6 +76,7 @@ func (r *Resource) getDynamicHandle(folderPath string, status int) http.Handler 
 			return
 		}
 		defer data.Close()
+
 		w.Header().Set("Content-type", "application/json; charset=utf-8")
 		for key, value := range r.Headers {
 			if key == "Content-type" {
@@ -88,9 +91,9 @@ func (r *Resource) getDynamicHandle(folderPath string, status int) http.Handler 
 
 // check a file or folder exist and return boolean value
 func fileExist(path string) bool {
-	_, err := os.Stat(path)
-	if err != nil {
+	if _, err := os.Stat(path); err != nil {
 		return false
 	}
+
 	return true
 }

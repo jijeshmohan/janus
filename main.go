@@ -25,14 +25,11 @@ func getConfig() *config.Config {
 	}
 
 	c, err := config.ParseFile(filepath.Join(path, "config.json"))
-
 	if err != nil {
 		fmt.Printf("Config file error: %s\n", err.Error())
 		os.Exit(1)
 	}
 
-	// Add current path to the config
 	c.Path = path
-
 	return c
 }

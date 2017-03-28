@@ -16,9 +16,10 @@ func corsHandler(h http.Handler) http.Handler {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		if r.Method == "OPTIONS" {
 			w.WriteHeader(http.StatusOK)
-		} else {
-			h.ServeHTTP(w, r)
+			return
 		}
+
+		h.ServeHTTP(w, r)
 	})
 }
 
@@ -29,6 +30,7 @@ func delayHandler(delay int) handler {
 			if delay > 0 {
 				time.Sleep(time.Duration(delay) * time.Millisecond)
 			}
+
 			h.ServeHTTP(w, r)
 		})
 	}
@@ -43,6 +45,7 @@ func basicAuth(username string, password string) handler {
 				w.WriteHeader(http.StatusUnauthorized)
 				return
 			}
+
 			h.ServeHTTP(w, req)
 		})
 	}
@@ -79,10 +82,12 @@ func jwtVerify(j rest.JWTData) handler {
 				h.ServeHTTP(w, req)
 				return
 			}
+
 			auth := req.Header.Get("Authorization")
 			if strings.HasPrefix(strings.ToLower(auth), "bearer ") {
 				auth = auth[7:]
 			}
+
 			token, err := jwt.Parse(auth, func(token *jwt.Token) (interface{}, error) {
 				return []byte(j.Secret), nil
 			})

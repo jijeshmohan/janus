@@ -15,8 +15,13 @@ type Endpoint struct {
 // Endpoints represents an Endpoint slice.
 type Endpoints []*Endpoint
 
-func (a Endpoints) Len() int      { return len(a) }
-func (a Endpoints) Swap(i, j int) { a[i], a[j] = a[j], a[i] }
+func (a Endpoints) Len() int {
+	return len(a)
+}
+
+func (a Endpoints) Swap(i, j int) {
+	a[i], a[j] = a[j], a[i]
+}
 
 func (a Endpoints) Less(i, j int) bool {
 

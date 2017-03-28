@@ -54,10 +54,10 @@ func (u *URL) sanitize(root string) error {
 
 // GetEndPoint send an endpoint for the URL
 func (u *URL) GetEndPoint(rootPath string) (*Endpoint, error) {
-	err := u.sanitize(rootPath)
-	if err != nil {
+	if err := u.sanitize(rootPath); err != nil {
 		return nil, err
 	}
+
 	return &Endpoint{URL: u.URL, Method: u.Method, Handler: u.getHandle(rootPath)}, nil
 }
 
@@ -72,6 +72,7 @@ func (u *URL) getHandle(root string) http.Handler {
 				}
 				w.Header().Set(key, value)
 			}
+
 			w.WriteHeader(u.StatusCode)
 			w.Write([]byte(""))
 		})
@@ -82,6 +83,7 @@ func (u *URL) getHandle(root string) http.Handler {
 			w.WriteHeader(404)
 			return
 		}
+
 		defer data.Close()
 		w.Header().Set("Content-type", u.ContentType)
 		for key, value := range u.Headers {

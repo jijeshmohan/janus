@@ -23,7 +23,6 @@ func newRouter(c *config.Config) *router {
 
 // generate routes for all configuration entries.
 func (r *router) generateRoutes() (*mux.Router, []error) {
-
 	rootPath := r.c.Path
 
 	//  atleast one resource or url should present.
@@ -52,6 +51,7 @@ func (r *router) generateRoutes() (*mux.Router, []error) {
 			r.errs = append(r.errs, err)
 			continue
 		}
+
 		endpoints = append(endpoints, e)
 	}
 
@@ -62,6 +62,7 @@ func (r *router) generateRoutes() (*mux.Router, []error) {
 			r.errs = append(r.errs, err)
 			continue
 		}
+
 		endpoints = append(endpoints, e...)
 	}
 
@@ -77,7 +78,9 @@ func (r *router) generateRoutes() (*mux.Router, []error) {
 		if err != nil {
 			r.errs = append(r.errs, err)
 		}
+
 		r.h.PathPrefix(r.c.Static.URL).Handler(e.Handler)
 	}
+
 	return r.h, r.errs
 }

@@ -23,7 +23,6 @@ func (a *app) middleware(h handler) {
 
 // StartServer starts the server with the configuration provided.
 func StartServer(c *config.Config) {
-
 	router := newRouter(c)
 
 	routes, errs := router.generateRoutes()
@@ -35,14 +34,8 @@ func StartServer(c *config.Config) {
 		return
 	}
 
-	if c.Port == 0 {
-		c.Port = 8000
-	}
-	addr := fmt.Sprintf(":%d", c.Port)
-
-	fmt.Println("Starting server at ", addr)
-
 	server := &app{h: routes}
+
 	server.middleware(corsHandler)
 
 	if c.EnableLog {
@@ -60,8 +53,12 @@ func StartServer(c *config.Config) {
 	server.middleware(recoverHandler)
 	server.middleware(delayHandler(c.Delay))
 
+	if c.Port == 0 {
+		c.Port = 8000
+	}
+	addr := fmt.Sprintf(":%d", c.Port)
+	fmt.Println("Starting server at ", addr)
 	if err := http.ListenAndServe(addr, server); err != nil {
 		fmt.Println(err)
 	}
-
 }
