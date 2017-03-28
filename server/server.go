@@ -1,8 +1,11 @@
 package server
 
 import (
+	"context"
 	"fmt"
 	"net/http"
+	"os"
+	"time"
 
 	"github.com/jijeshmohan/janus/config"
 )
@@ -21,8 +24,10 @@ func (a *app) middleware(h handler) {
 	a.h = h(a.h)
 }
 
-// StartServer starts the server with the configuration provided.
-func StartServer(c *config.Config) {
+var srv *http.Server
+
+// Start server with the configuration provided.
+func Start(c *config.Config) {
 	router := newRouter(c)
 
 	routes, errs := router.generateRoutes()
@@ -57,8 +62,24 @@ func StartServer(c *config.Config) {
 		c.Port = 8000
 	}
 	addr := fmt.Sprintf(":%d", c.Port)
+
+	srv = &http.Server{Addr: addr, Handler: server}
 	fmt.Println("Starting server at ", addr)
-	if err := http.ListenAndServe(addr, server); err != nil {
+	if err := srv.ListenAndServe(); err != nil {
 		fmt.Println(err)
+	}
+}
+
+// Stop for stopping s running server
+func Stop() {
+	if srv == nil {
+		return
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	if err := srv.Shutdown(ctx); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
 	}
 }

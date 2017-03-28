@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/signal"
 	"path/filepath"
 
 	"github.com/jijeshmohan/janus/config"
@@ -13,7 +14,12 @@ func main() {
 	fmt.Printf("Janus - fake rest api server (%s) \n", VERSION)
 	c := getConfig()
 
-	server.StartServer(c)
+	go server.Start(c)
+	ch := make(chan os.Signal, 1)
+	signal.Notify(ch, os.Interrupt)
+	<-ch
+
+	server.Stop()
 }
 
 // getConfig get the configuration from the config file.
